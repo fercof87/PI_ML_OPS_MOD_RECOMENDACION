@@ -49,9 +49,9 @@ def getUserData(user_id: str = Query(..., description="ID del usuario (alfanumé
             raise HTTPException(status_code=400, detail="El parámetro 'user_id' debe ser alfanumérico con caracteres especiales permitidos.")
         
         #Abrimos archivos
-        df_spent     = leerJsonGz("spent_by_user.json.gz",1)
-        df_recommend = leerJsonGz("perc_recommend_by_user.json.gz",1)
-        df_count     = leerJsonGz("count_items_by_user.json.gz",1)
+        df_spent     = leerJsonGz("Datos/","spent_by_user.json.gz",1)
+        df_recommend = leerJsonGz("Datos/","perc_recommend_by_user.json.gz",1)
+        df_count     = leerJsonGz("Datos/","count_items_by_user.json.gz",1)
 
         # Filtramos los df por user_id
         df_spent     = df_spent[df_spent['user_id'] == user_id]
@@ -103,7 +103,7 @@ def getCountReviews(start_date: str = Query(..., description="Fecha de inicio en
             raise HTTPException(status_code=400, detail="Las fechas deben estar en formato YYYY-MM-DD.")
         
         #Abrimos archivos
-        df_user_reviews = leerJsonGz("user_reviews_posted.json.gz",1)
+        df_user_reviews = leerJsonGz("Datos/","user_reviews_posted.json.gz",1)
 
         #Genero copias en formato str
         start_date_str = start_date
@@ -171,7 +171,7 @@ def getGenreRank(genre: str = Query(..., description="Género (letras y espacios
             raise HTTPException(status_code=400, detail="El parámetro 'genre' debe contener solo letras y espacios.")
         
         #Abrimos archivos
-        df_genre_ranking = leerJsonGz("genre_ranking.json.gz",1)
+        df_genre_ranking = leerJsonGz("Datos/","genre_ranking.json.gz",1)
         #Obtenemos el ranking
         ranking = (df_genre_ranking[df_genre_ranking['genre'].str.lower() == genre.lower()].index).values[0] + 1
 
@@ -217,7 +217,7 @@ def getUserForGenre(genre: str = Query(..., description="Género (letras y espac
             raise HTTPException(status_code=400, detail="El parámetro 'genre' debe contener solo letras y espacios.")
         
         #Abrimos archivos
-        df_user_genre = leerJsonGz("user_genre_ranking.json.gz",1)
+        df_user_genre = leerJsonGz("Datos/","user_genre_ranking.json.gz",1)
 
         #Filtramos el DF
         df_user_genre = df_user_genre[df_user_genre['genres'].str.lower() == genre.lower()]
@@ -264,7 +264,7 @@ def getDeveloperData(developer: str = Query(..., description="Desarrollador (alf
             raise HTTPException(status_code=400, detail="El parámetro 'developer' debe ser alfanumérico con caracteres especiales permitidos.")
         
         #Abrimos archivos
-        df_developer = leerJsonGz("content_developer.json.gz",1)
+        df_developer = leerJsonGz("Datos/","content_developer.json.gz",1)
 
         # Filtramos los df por user_id
         df_developer = df_developer[df_developer['developer'].str.lower() == developer.lower()]
@@ -316,7 +316,7 @@ def getDeveloperDataHtml(developer: str = Query(..., description="Desarrollador 
             raise HTTPException(status_code=400, detail="El parámetro 'developer' debe ser alfanumérico con caracteres especiales permitidos.")
         
         #Abrimos archivos
-        df_developer = leerJsonGz("content_developer.json.gz",1)
+        df_developer = leerJsonGz("Datos/","content_developer.json.gz",1)
 
         # Filtramos los df por user_id
         df_developer = df_developer[df_developer['developer'].str.lower() == developer.lower()]
@@ -406,7 +406,7 @@ def getSentimentAnalysisForYear(year: str = Query(..., description="Año (4 díg
         year = int(year)
 
         #Abrimos archivos
-        df_sentiment = leerJsonGz("reviews_year.json.gz",1)
+        df_sentiment = leerJsonGz("Datos/","reviews_year.json.gz",1)
 
         #filtramos
         df_sentiment = df_sentiment[df_sentiment['year'] == year]
@@ -462,10 +462,12 @@ def getRecomendationByItem(item_id: str = Query(..., description="Item Id Numeri
             raise HTTPException(status_code=400, detail="El parámetro 'item_id' debe ser un Numerico.")
         
         #Abrimos archivos
-        df_similarities = leerJsonGz("df_similarities.json.gz",1)
+        df_similarities = leerJsonGz("Datos/","df_similarities.json.gz",1)
 
         # Establecer 'item_id' como el índice
         df_similarities.set_index('item_id', inplace=True)
+        #convertimos el indice en int
+        df_similarities.index = df_similarities.index.astype(int)
         
         if item_id not in df_similarities.index:
             return []
