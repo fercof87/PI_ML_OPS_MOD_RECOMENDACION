@@ -463,6 +463,9 @@ def getRecomendationByItem(item_id: str = Query(..., description="Item Id Numeri
         
         #Abrimos archivos
         df_similarities = leerJsonGz("df_similarities.json.gz",1)
+
+        # Establecer 'item_id' como el índice
+        df_similarities.set_index('item_id', inplace=True)
         
         if item_id not in df_similarities.index:
             return []
