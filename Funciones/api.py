@@ -431,30 +431,46 @@ def getSentimentAnalysisForYear(year: str = Query(..., description="Año (4 díg
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error en getSentimentAnalysisForYear: {str(e)}")
     
-'''--------------------------------------------------------------------------------
+
+    
+'''-------------------------------------------------------------------------------------------
                              SECCION MACHINE LEARNING
---------------------------------------------------------------------------------'''
+-------------------------------------------------------------------------------------------'''
 
 
 #7 
-'''--------------------------------------------------------------------------------
+'''-------------------------------------------------------------------------------------------
 Autor   :   Ing. Fernando G. Cofone
 Fecha   :   16 de Septiembre de 2023
-Objetivo:   
-Params :    
-Returns :   
---------------------------------------------------------------------------------'''
-def getRecomendationByItem(item_id: str = Query(..., description="Item Id (4 dígitos)")):
-    return None
+Objetivo:   Obtener recomendaciones basadas en un ítem específico.
+Params  :   item_id (str) - El ID del ítem para el cual se desea obtener recomendaciones.
+Returns :   Una lista de los IDs de los ítems recomendados.
+-------------------------------------------------------------------------------------------'''
+def getRecomendationByItem(item_id: str = Query(..., description="Item Id Numerico")):
 
+    #Declaramos una variable para la cantidad de elementos a Recomendar
+    N = 5
 
-#8
-'''--------------------------------------------------------------------------------
-Autor   :   Ing. Fernando G. Cofone
-Fecha   :   16 de Septiembre de 2023
-Objetivo:   
-Params :    
-Returns :   
---------------------------------------------------------------------------------'''
-def getRecomendationByUser(user_id: str = Query(..., description="User Id (4 dígitos)")):
-    return None
+    try:
+
+        # Validar que year esté presente
+        if not item_id:
+            raise HTTPException(status_code=400, detail="El parámetro 'item_id' es obligatorio y no puede estar vacío.")
+
+        # Validar que year sea un número
+        if not item_id.isdigit():
+            raise HTTPException(status_code=400, detail="El parámetro 'item_id' debe ser un Numerico.")
+        
+        #Abrimos archivos
+        df_similarities = leerJsonGz("df_similarities.json.gz",1)
+        
+        if item_id not in df_similarities.index:
+            return []
+        
+        similar_games = df_similarities.loc[item_id].sort_values(ascending=False)
+        top_similar_games = similar_games.drop(item_id).index[:N]
+        
+        return top_similar_games
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en getRecomendationByItem: {str(e)}")

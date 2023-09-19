@@ -50,6 +50,6 @@ async def recomendacion_juego(item_id: str):
 
 
 #8 - Machine Learning - Recomendacion by User
-@app.get("/sentimentAnalysis/{user_id:path}")
-async def recomendacion_usuario(user_id: str):
-    return getRecomendationByUser(user_id)
+#@app.get("/sentimentAnalysis/{user_id:path}")
+#async def recomendacion_usuario(user_id: str):
+#    return getRecomendationByUser(user_id)
