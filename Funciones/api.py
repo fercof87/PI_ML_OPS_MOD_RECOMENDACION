@@ -461,6 +461,9 @@ def getRecomendationByItem(item_id: str = Query(..., description="Item Id Numeri
         if not item_id.isdigit():
             raise HTTPException(status_code=400, detail="El parámetro 'item_id' debe ser un Numerico.")
         
+        #Casteamos la variable 
+        item_id = int(item_id)
+        
         #Abrimos archivos
         df_similarities = leerJsonGz("Datos/","df_similarities.json.gz",1)
 
