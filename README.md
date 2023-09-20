@@ -12,11 +12,11 @@
 <br>
 
 ## Enlaces
-<table>
+<table align="center">
   <tr>
     <td align="center">
       <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
-        <img src="\PI_ML_OPS_MOD_RECOMENDACION\src\linkedin.png" alt="LinkedIn" width="75" height="75">
+        <img src="src/linkedin.png" alt="LinkedIn" width="75" height="75">
         <br>Mi LinkedIn
       </a>
     </td>
