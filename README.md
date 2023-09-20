@@ -12,20 +12,28 @@
 <br>
 
 ## Enlaces
-<p align="center">
-  <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
-    <img src="\PI_ML_OPS_MOD_RECOMENDACION\src\linkedin.png" alt="LinkedIn" width="75" height="75">
-    <br>Mi LinkedIn
-  </a>
-  <a href="https://github.com/fercof87/PI_ML_OPS_MOD_RECOMENDACION" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
-    <img src="src/github.png" alt="GitHub" width="75" height="75">
-    <br>GitHub
-  </a>
-  <a href="https://pi-ml-ops-mod-recomendacion.onrender.com" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
-    <img src="src/api.png" alt="Render" width="75" height="75">
-    <br>Mi API
-  </a>
-</p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+        <img src="src/linkedin.png" alt="LinkedIn" width="75" height="75">
+        <br>Mi LinkedIn
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/fercof87/PI_ML_OPS_MOD_RECOMENDACION" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+        <img src="src/github.png" alt="GitHub" width="75" height="75">
+        <br>GitHub
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://pi-ml-ops-mod-recomendacion.onrender.com" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+        <img src="src/api.png" alt="Render" width="75" height="75">
+        <br>Mi API
+      </a>
+    </td>
+  </tr>
+</table>
 <hr>
 <br>
 
@@ -122,6 +130,7 @@ La API resultante se desplegó en la plataforma RENDER, facilitando el acceso a 
 ## Librerías Utilizadas
 
 <p style="text-align: justify;">
+  
 - **json/Gzip/ast**: Este conjunto de librerías me sirvió para realizar la lectura y persistencia de los archivos reducidos generados para los endpoints. Además, fueron utilizadas para particionar los inputs de entrada en archivos más pequeños, de esa manera me fue posible subirlos a GitHub y Render sin problemas.
 
 - **TextBlob**: Utilizada para poder realizar el análisis de sentimientos sobre las reviews de los usuarios.
@@ -136,6 +145,7 @@ La API resultante se desplegó en la plataforma RENDER, facilitando el acceso a 
 ## Organización del Repositorio
 
 <p style="text-align: justify;">
+  
 - **Datos**: Aquí están todos los archivos generados en el proceso de ETL/EDA. Dentro de Datos/Particiones, están los 3 inputs de la plataforma Steam, pero particionados en partes más pequeñas, como se mencionó anteriormente.
 
 - **Funciones**: Conjunto de todas las funciones desarrolladas, las cuales son utilizadas a lo largo del proyecto. Hay funciones de Fechas, Json, API y TextBlob. Se planteó desde el inicio el foco en la modularización y reutilización de código.
@@ -147,6 +157,7 @@ La API resultante se desplegó en la plataforma RENDER, facilitando el acceso a 
 - **ETL.py**: Análisis exploratorio, transformación de datos, imputaciones y generación de archivos reducidos.
 
 - **particionamiento.py**: código empleado para fraccionar los inputs en partes más pequeñas.
+  
 </p>
 
 <br>
@@ -154,20 +165,34 @@ La API resultante se desplegó en la plataforma RENDER, facilitando el acceso a 
 <br>
 <hr>
 
-<p align="center">
-  <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
-    <img src="src/linkedin.png" alt="LinkedIn" width="75" height="75">
-    <br>Mi LinkedIn
-  </a>
-  <a href="https://github.com/fercof87/PI_ML_OPS_MOD_RECOMENDACION" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
-    <img src="src/github.png" alt="GitHub" width="75" height="75">
-    <br>GitHub
-  </a>
-  <a href="https://pi-ml-ops-mod-recomendacion.onrender.com" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
-    <img src="src/api.png" alt="Render" width="75" height="75">
-    <br>Mi API
-  </a>
-</p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+        <img src="src/linkedin.png" alt="LinkedIn" width="75" height="75">
+        <br>Mi LinkedIn
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/fercof87/PI_ML_OPS_MOD_RECOMENDACION" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+        <img src="src/github.png" alt="GitHub" width="75" height="75">
+        <br>GitHub
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://pi-ml-ops-mod-recomendacion.onrender.com" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+        <img src="src/api.png" alt="Render" width="75" height="75">
+        <br>Mi API
+      </a>
+    </td>
+  </tr>
+</table>
+
 <hr>
 <br>
-<div style="text-align:center; color:#FCCf33;"> ¡Gracias por su interés en mi trabajo! </div>
+
+<div style="text-align: center; color:#FCCf33;"> 
+  <p style="text-align: center;">
+    ¡Gracias por su interés en mi trabajo!
+  </p>
+</div>
