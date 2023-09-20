@@ -194,5 +194,5 @@ La API resultante se desplegó en la plataforma RENDER, facilitando el acceso a 
 <div style="text-align: center; color:#FCCf33;"> 
   <p style="text-align: center;">
     ¡Gracias por su interés en mi trabajo!
-  </p>p
+  </p>
 </div>
