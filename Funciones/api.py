@@ -29,20 +29,14 @@ def getIndex():
                 <h2>MLOPs - Recomendación de Juegos</h2>
                 <hr> <!-- Línea horizontal -->
                 <h2>Enlaces:</h2>
-                <p align="center">
-                    <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 10px; display: inline-block; padding: 5px; border-radius: 5px;">
-                        <img src="src/linkedin.png" alt="LinkedIn" width="75" height="75">
-                        <br>Mi LinkedIn
-                    </a>
-                    <a href="https://github.com/fercof87/PI_ML_OPS_MOD_RECOMENDACION" style="margin: 0 10px; display: inline-block; padding: 5px; border-radius: 5px;">
-                        <img src="src/github.png" alt="Proyecto en GitHub" width="75" height="75">
-                        <br>Mi GitHub
-                    </a>
-                    <a href="https://pi-ml-ops-mod-recomendacion.onrender.com" style="margin: 0 10px; display: inline-block; padding: 5px; border-radius: 5px;">
-                        <img src="src/render.png" alt="Render" width="65" height="65">
-                        <br>Mi API
-                    </a>
-                </p>
+                    <p align="center">
+                        <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+                            Mi Linkedin
+                        </a> 
+                        <a href="https://github.com/fercof87/PI_ML_OPS_MOD_RECOMENDACION" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+                            Proyecto GitHub
+                        </a> 
+                    </p>
                 <h2>Endpoints:</h2>
                 <ol>
                     <li><code><strong style="color: #ff5733">/userdata/</strong> (User_id: str)</code>:<br>&nbsp;&nbsp;&nbsp;Proporciona detalles sobre el gasto del usuario, el porcentaje de recomendación basado en reseñas y la cantidad de ítems.</li>

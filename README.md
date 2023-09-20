@@ -12,18 +12,17 @@
 <br>
 
 ## Enlaces
-
 <p align="center">
-  <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 10px; display: inline-block; padding: 5px; border-radius: 5px;">
-    <img src="src/linkedin.png" alt="LinkedIn" width="75" height="75">
+  <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+    <img src="\PI_ML_OPS_MOD_RECOMENDACION\src\linkedin.png" alt="LinkedIn" width="75" height="75">
     <br>Mi LinkedIn
   </a>
-  <a href="https://github.com/fercof87" style="margin: 0 10px; display: inline-block; padding: 5px; border-radius: 5px;">
+  <a href="https://github.com/fercof87/PI_ML_OPS_MOD_RECOMENDACION" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
     <img src="src/github.png" alt="GitHub" width="75" height="75">
-    <br>Mi GitHub
+    <br>GitHub
   </a>
-  <a href="https://pi-ml-ops-mod-recomendacion.onrender.com" style="margin: 0 10px; display: inline-block; padding: 5px; border-radius: 5px;">
-    <img src="src/render.png" alt="Render" width="65" height="65">
+  <a href="https://pi-ml-ops-mod-recomendacion.onrender.com" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+    <img src="src/api.png" alt="Render" width="75" height="75">
     <br>Mi API
   </a>
 </p>
@@ -156,16 +155,16 @@ La API resultante se desplegó en la plataforma RENDER, facilitando el acceso a 
 <hr>
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 10px; display: inline-block; padding: 5px; border-radius: 5px;">
+  <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
     <img src="src/linkedin.png" alt="LinkedIn" width="75" height="75">
     <br>Mi LinkedIn
   </a>
-  <a href="https://github.com/fercof87" style="margin: 0 10px; display: inline-block; padding: 5px; border-radius: 5px;">
+  <a href="https://github.com/fercof87/PI_ML_OPS_MOD_RECOMENDACION" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
     <img src="src/github.png" alt="GitHub" width="75" height="75">
-    <br>Mi GitHub
+    <br>GitHub
   </a>
-  <a href="https://pi-ml-ops-mod-recomendacion.onrender.com" style="margin: 0 10px; display: inline-block; padding: 5px; border-radius: 5px;">
-    <img src="src/render.png" alt="Render" width="65" height="65">
+  <a href="https://pi-ml-ops-mod-recomendacion.onrender.com" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+    <img src="src/api.png" alt="Render" width="75" height="75">
     <br>Mi API
   </a>
 </p>
