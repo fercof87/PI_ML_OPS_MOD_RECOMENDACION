@@ -18,26 +18,43 @@ def getIndex():
 
     try:
         html_content = """
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Información General de la API</title>
-        </head>
-        <body>
-            <h1>API Creada por Ing. Fernando G. Cofone</h1>
-            <h2>MLOPs - Recomendación de Juegos</h2>
-            <h2>Endpoints:</h2>
-            <ol>
-                <li><code>/userdata(User_id: str)</code>: Proporciona detalles sobre el gasto del usuario, el porcentaje de recomendación basado en reseñas y la cantidad de ítems.</li>
-                <li><code>/countreviews(YYYY-MM-DD1: str, YYYY-MM-DD2: str)</code>: Calcula la cantidad de usuarios que realizaron reseñas entre las fechas proporcionadas y el porcentaje de recomendación basado en reseñas.</li>
-                <li><code>/genre(género: str)</code>: Muestra el puesto en el ranking para un género de videojuegos específico según la columna PlayTimeForever.</li>
-                <li><code>/userforgenre(género: str)</code>: Ofrece el top 5 de usuarios con más horas de juego en el género especificado, junto con su URL y user_id.</li>
-                <li><code>/developer(desarrollador: str)</code>: Presenta información sobre la cantidad de ítems y el porcentaje de contenido gratuito por año, según la empresa desarrolladora.</li>
-                <li><code>/sentiment_analysis(año: int)</code>: Devuelve una lista con la cantidad de registros de reseñas de usuarios categorizados con análisis de sentimiento para un año de lanzamiento dado.</li>
-                <li><code>/recommendation(item_id: int)</code>: Devuelve una lista de recomendación de 5 juegos similares al item_id suministrado. En caso de no encontrar el item_id, recomendará los 5 juegos con más calificaciones positivas detectadas en las reviews.</li>
-            </ol>
-        </body>
-        </html>
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Información General de la API</title>
+            </head>
+            <body>
+                <h1>API Creada por Ing. Fernando G. Cofone</h1>
+                <hr> <!-- Línea horizontal -->
+                <h2>MLOPs - Recomendación de Juegos</h2>
+                <hr> <!-- Línea horizontal -->
+                <h2>Enlaces:</h2>
+                <p align="center">
+                    <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 10px; display: inline-block; padding: 5px; border-radius: 5px;">
+                        <img src="src/linkedin.png" alt="LinkedIn" width="75" height="75">
+                        <br>Mi LinkedIn
+                    </a>
+                    <a href="https://github.com/fercof87/PI_ML_OPS_MOD_RECOMENDACION" style="margin: 0 10px; display: inline-block; padding: 5px; border-radius: 5px;">
+                        <img src="src/github.png" alt="Proyecto en GitHub" width="75" height="75">
+                        <br>Mi GitHub
+                    </a>
+                    <a href="https://pi-ml-ops-mod-recomendacion.onrender.com" style="margin: 0 10px; display: inline-block; padding: 5px; border-radius: 5px;">
+                        <img src="src/render.png" alt="Render" width="65" height="65">
+                        <br>Mi API
+                    </a>
+                </p>
+                <h2>Endpoints:</h2>
+                <ol>
+                    <li><code><strong style="color: #ff5733">/userdata/</strong> (User_id: str)</code>:<br>&nbsp;&nbsp;&nbsp;Proporciona detalles sobre el gasto del usuario, el porcentaje de recomendación basado en reseñas y la cantidad de ítems.</li>
+                    <li><code><strong style="color: #ff5733">/countreviews/</strong> (YYYY-MM-DD1: str, YYYY-MM-DD2: str)</code>:<br>&nbsp;&nbsp;&nbsp;Calcula la cantidad de usuarios que realizaron reseñas entre las fechas proporcionadas y el porcentaje de recomendación basado en reseñas.</li>
+                    <li><code><strong style="color: #ff5733">/genre/</strong> (género: str)</code>:<br>&nbsp;&nbsp;&nbsp;Muestra el puesto en el ranking para un género de videojuegos específico según la columna PlayTimeForever.</li>
+                    <li><code><strong style="color: #ff5733">/userforgenre/</strong> (género: str)</code>:<br>&nbsp;&nbsp;&nbsp;Ofrece el top 5 de usuarios con más horas de juego en el género especificado, junto con su URL y user_id.</li>
+                    <li><code><strong style="color: #ff5733">/developer/</strong> (desarrollador: str)</code>:<br>&nbsp;&nbsp;&nbsp;Presenta información sobre la cantidad de ítems y el porcentaje de contenido gratuito por año, según la empresa desarrolladora.</li>
+                    <li><code><strong style="color: #ff5733">/sentiment_analysis/</strong> (año: int)</code>:<br>&nbsp;&nbsp;&nbsp;Devuelve una lista con la cantidad de registros de reseñas de usuarios categorizados con análisis de sentimiento para un año de lanzamiento dado.</li>
+                    <li><code><strong style="color: #ff5733">/recommendation/</strong> (item_id: int)</code>:<br>&nbsp;&nbsp;&nbsp;Devuelve una lista de recomendación de 5 juegos similares al item_id suministrado. En caso de no encontrar el item_id, recomendará los 5 juegos con más calificaciones positivas detectadas en las reviews.</li>
+                </ol>
+            </body>
+            </html>
         """
         return HTMLResponse(content=html_content)
     
