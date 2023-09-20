@@ -446,10 +446,7 @@ Objetivo:   Obtener recomendaciones basadas en un ítem específico.
 Params  :   item_id (str) - El ID del ítem para el cual se desea obtener recomendaciones.
 Returns :   Una lista de los IDs de los ítems recomendados.
 -------------------------------------------------------------------------------------------'''
-def getRecomendationByItem(item_id: str = Query(..., description="Item Id Numerico")):
-
-    #Declaramos una variable para la cantidad de elementos a Recomendar
-    N = 5
+def getRecommendationByItem(item_id: str = Query(..., description="Item Id Numerico")):
 
     try:
 
@@ -465,20 +462,21 @@ def getRecomendationByItem(item_id: str = Query(..., description="Item Id Numeri
         item_id = int(item_id)
         
         #Abrimos archivos
-        df_similarities = leerJsonGz("Datos/","df_similarities.json.gz",1)
+        df_recommendations = leerJsonGz("Datos/","df_recommendations.json.gz",1)
 
         # Establecer 'item_id' como el índice
-        df_similarities.set_index('item_id', inplace=True)
+        df_recommendations.set_index('item_id', inplace=True)
         #convertimos el indice en int
-        df_similarities.index = df_similarities.index.astype(int)
+        df_recommendations.index = df_recommendations.index.astype(int)
         
-        if item_id not in df_similarities.index:
-            return []
+        if item_id not in df_recommendations.index:
+            df_default_recommend_5 = leerJsonGz("Datos/","default_recommend_5.json.gz",1)
+            recommendations = df_default_recommend_5['item_id'].tolist()
+        else:
+            # Obtener las 5 recomendaciones para el item_id especificado
+            recommendations = df_recommendations.loc[item_id].tolist()
         
-        similar_games = df_similarities.loc[item_id].sort_values(ascending=False)
-        top_similar_games = similar_games.drop(item_id).index[:N]
-        
-        return top_similar_games
+        return recommendations
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error en getRecomendationByItem: {str(e)}")
