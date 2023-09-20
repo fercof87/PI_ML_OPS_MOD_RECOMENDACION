@@ -73,16 +73,20 @@ def getUserData(user_id: str = Query(..., description="ID del usuario (alfanumé
 
         # Validar que user_id esté presente
         if not user_id:
-            raise HTTPException(status_code=400, detail="El parámetro 'user_id' es obligatorio y no puede estar vacío.")
+            return JSONResponse(content = ["El parámetro 'user_id' es obligatorio y no puede estar vacío."])
 
         # Validar que user_id sea alfanumérico con caracteres especiales permitidos
         if not user_id.isalnum():
-            raise HTTPException(status_code=400, detail="El parámetro 'user_id' debe ser alfanumérico con caracteres especiales permitidos.")
+            return JSONResponse(content = ["El parámetro 'user_id' debe ser alfanumérico con caracteres especiales permitidos."])
         
         #Abrimos archivos
         df_spent     = leerJsonGz("Datos/","spent_by_user.json.gz",1)
         df_recommend = leerJsonGz("Datos/","perc_recommend_by_user.json.gz",1)
         df_count     = leerJsonGz("Datos/","count_items_by_user.json.gz",1)
+
+        # Validamos que exista el user_id en los 3 DFs
+        if (user_id not in df_spent['user_id'].values) and (user_id not in df_recommend['user_id'].values) and (user_id not in df_count['user_id'].values):
+            return JSONResponse(content = ["Usuario No Encontrado"]) 
 
         # Filtramos los df por user_id
         df_spent     = df_spent[df_spent['user_id'] == user_id]
@@ -124,14 +128,14 @@ def getCountReviews(start_date: str = Query(..., description="Fecha de inicio en
 
         # Validar que start_date y end_date estén presentes
         if not start_date or not end_date:
-            raise HTTPException(status_code=400, detail="Los parámetros 'start_date' y 'end_date' son obligatorios y no pueden estar vacíos.")
+            return JSONResponse(content = ["Los parámetros 'start_date' y 'end_date' son obligatorios y no pueden estar vacíos."])
 
         # Validar el formato de las fechas
         try:
             start_date = datetime.strptime(start_date, '%Y-%m-%d')
             end_date   = datetime.strptime(end_date, '%Y-%m-%d')
         except ValueError:
-            raise HTTPException(status_code=400, detail="Las fechas deben estar en formato YYYY-MM-DD.")
+            return JSONResponse(content = ["Las fechas deben estar en formato YYYY-MM-DD."]) 
         
         #Abrimos archivos
         df_user_reviews = leerJsonGz("Datos/","user_reviews_posted.json.gz",1)
@@ -150,6 +154,11 @@ def getCountReviews(start_date: str = Query(..., description="Fecha de inicio en
         #Filtramos todo el DF por las fechas recibidas
         df_user_reviews = df_user_reviews[(df_user_reviews['posted'] >= start_date) & (df_user_reviews['posted'] <= end_date)]
 
+   
+        # Validamos que tengamos resultados
+        if (df_user_reviews.shape[0] == 0):
+            return JSONResponse(content = ["No se Han Encontrado Datos entre las Fechas Ingresadas"]) 
+           
         #Usuarios Unicos 
         unique_users   = df_user_reviews['user_id'].unique().shape[0]
         recommend_0    = df_user_reviews[df_user_reviews['recommend'] == 0]['recommend'].shape[0]
@@ -160,10 +169,10 @@ def getCountReviews(start_date: str = Query(..., description="Fecha de inicio en
             perc_recommend = 0.0
         else:
             perc_recommend = (recommend_1 / (recommend_0 + recommend_1)) * 100
-
+    
         #Creamos un DF
-        data = {'START DATE':   [start_date_str],
-                'END DATE':     [end_date_str],
+        data = {'START DATE':   [start_date_str.strftime('%Y-%m-%d')],
+                'END DATE':     [end_date_str.strftime('%Y-%m-%d')],
                 'USERs COUNT':  [unique_users],
                 '% RECOMMEND':  ['{:.2f}%'.format(perc_recommend)]}
 
@@ -195,14 +204,19 @@ def getGenreRank(genre: str = Query(..., description="Género (letras y espacios
 
         # Validar que genre esté presente
         if not genre:
-            raise HTTPException(status_code=400, detail="El parámetro 'genre' es obligatorio y no puede estar vacío.")
+            return JSONResponse(content = ["El parámetro 'genre' es obligatorio y no puede estar vacío."])
 
         # Validar que genre contenga solo letras y espacios
         if not all(char.isalpha() or char.isspace() for char in genre):
-            raise HTTPException(status_code=400, detail="El parámetro 'genre' debe contener solo letras y espacios.")
+            return JSONResponse(content = ["El parámetro 'genre' debe contener solo letras y espacios."])
         
         #Abrimos archivos
         df_genre_ranking = leerJsonGz("Datos/","genre_ranking.json.gz",1)
+
+        #Validamos que el genero este rankeado
+        if not (df_genre_ranking['genre'].str.lower() == genre.lower()).any():
+            return JSONResponse(content = ["El Genero no Se encuentra Rankeado"]) 
+
         #Obtenemos el ranking
         ranking = (df_genre_ranking[df_genre_ranking['genre'].str.lower() == genre.lower()].index).values[0] + 1
 
@@ -233,42 +247,40 @@ Params  :   genre  (str): Género a consultar.
 Returns :   JSONResponse: Lista de usuarios por género en formato JSON.  
 --------------------------------------------------------------------------------'''
 def getUserForGenre(genre: str = Query(..., description="Género (letras y espacios)")):
-
     try:
-
         # Quitar espacios en blanco del principio y el final
-        genre = genre.strip()
+        genre = genre.strip().lower()
 
         # Validar que genre esté presente
         if not genre:
-            raise HTTPException(status_code=400, detail="El parámetro 'genre' es obligatorio y no puede estar vacío.")
-
-        # Validar que genre contenga solo letras y espacios
-        if not all(char.isalpha() or char.isspace() for char in genre):
-            raise HTTPException(status_code=400, detail="El parámetro 'genre' debe contener solo letras y espacios.")
+            return JSONResponse(content = ["El parámetro 'genre' es obligatorio y no puede estar vacío."])
         
         #Abrimos archivos
         df_user_genre = leerJsonGz("Datos/","user_genre_ranking.json.gz",1)
 
-        #Filtramos el DF
-        df_user_genre = df_user_genre[df_user_genre['genres'].str.lower() == genre.lower()]
+        # Filtrar el DF directamente
+        df_user_genre = df_user_genre[df_user_genre['genres'].str.lower() == genre]
 
-        #Agrupamos y sumamos playtime_forever
+        # Validar si se encontraron registros
+        if df_user_genre.empty:
+            return JSONResponse(content=["El Género no ha sido Encontrado"])
+
+        # Agrupar y sumar playtime_forever
         df_user_genre = df_user_genre.groupby(['user_id', 'user_url'])['playtime_forever'].sum().reset_index()
-        #Ordenamos por Playtime_forever
-        df_user_genre = df_user_genre.sort_values(by='playtime_forever', ascending=False)
-        # Restablecer los índices del DataFrame ordenado
-        df_user_genre.reset_index(drop=True, inplace=True)
 
-        # Renombramos Columnas
+        # Ordenar por Playtime_forever y limitar a los primeros 5 registros
+        df_user_genre = df_user_genre.nlargest(5, 'playtime_forever')
+
+        # Renombrar columnas
         df_user_genre.columns = ['USER ID', 'USER URL', 'PLAYTIME FOREVER']
 
-        result_list = df_user_genre.head(5).to_dict(orient='records')
+        result_list = df_user_genre.to_dict(orient='records')
 
-        return JSONResponse(content = result_list)
+        return JSONResponse(content=result_list)
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error en getUserForGenre: {str(e)}")
+
 
 
 #5 - Version JSON
@@ -288,11 +300,11 @@ def getDeveloperData(developer: str = Query(..., description="Desarrollador (alf
 
         # Validar que developer esté presente
         if not developer:
-            raise HTTPException(status_code=400, detail="El parámetro 'developer' es obligatorio y no puede estar vacío.")
+            return JSONResponse(content = ["El parámetro 'developer' es obligatorio y no puede estar vacío."])
 
         # Validar que developer sea alfanumérico con caracteres especiales permitidos
         if not developer.isalnum():
-            raise HTTPException(status_code=400, detail="El parámetro 'developer' debe ser alfanumérico con caracteres especiales permitidos.")
+            return JSONResponse(content = ["El parámetro 'developer' debe ser alfanumérico con caracteres especiales permitidos."])
         
         #Abrimos archivos
         df_developer = leerJsonGz("Datos/","content_developer.json.gz",1)
@@ -300,6 +312,10 @@ def getDeveloperData(developer: str = Query(..., description="Desarrollador (alf
         # Filtramos los df por user_id
         df_developer = df_developer[df_developer['developer'].str.lower() == developer.lower()]
 
+        # Validar si se encontraron registros
+        if df_developer.shape[0] == 0:
+            return JSONResponse(content=["El Developer no ha sido Encontrado"])
+        
         #formateamos Developer
         df_developer['developer'] = df_developer['developer'].astype(str)
         df_developer['developer'] = df_developer['developer'].str.capitalize()
@@ -340,11 +356,11 @@ def getDeveloperDataHtml(developer: str = Query(..., description="Desarrollador 
 
         # Validar que developer esté presente
         if not developer:
-            raise HTTPException(status_code=400, detail="El parámetro 'developer' es obligatorio y no puede estar vacío.")
+            return JSONResponse(content = ["El parámetro 'developer' es obligatorio y no puede estar vacío."])
 
         # Validar que developer sea alfanumérico con caracteres especiales permitidos
         if not developer.isalnum():
-            raise HTTPException(status_code=400, detail="El parámetro 'developer' debe ser alfanumérico con caracteres especiales permitidos.")
+            return JSONResponse(content = ["El parámetro 'developer' debe ser alfanumérico con caracteres especiales permitidos."])
         
         #Abrimos archivos
         df_developer = leerJsonGz("Datos/","content_developer.json.gz",1)
@@ -352,6 +368,10 @@ def getDeveloperDataHtml(developer: str = Query(..., description="Desarrollador 
         # Filtramos los df por user_id
         df_developer = df_developer[df_developer['developer'].str.lower() == developer.lower()]
 
+        # Validar si se encontraron registros
+        if df_developer.shape[0] == 0:
+            return JSONResponse(content=["El Developer no ha sido Encontrado"])
+        
         # Formateamos perc_recommend
         df_developer['free_content'] = df_developer['free_content'].apply(lambda x: '{:.2f}'.format(x))
         df_developer['free_content'] = df_developer['free_content'].astype(str) + ' %'
@@ -411,6 +431,7 @@ def getDeveloperDataHtml(developer: str = Query(..., description="Desarrollador 
         raise HTTPException(status_code=500, detail=f"Error en getDeveloperDataHtml: {str(e)}")
 
 
+#6
 '''--------------------------------------------------------------------------------
 Autor   :   Ing. Fernando G. Cofone
 Fecha   :   14 de Septiembre de 2023
@@ -424,15 +445,20 @@ def getSentimentAnalysisForYear(year: str = Query(..., description="Año (4 díg
 
         # Quitar espacios en blanco del principio y el final
         year = year.strip()
-
+        
         # Validar que year esté presente
         if not year:
-            raise HTTPException(status_code=400, detail="El parámetro 'year' es obligatorio y no puede estar vacío.")
+            return JSONResponse(content=["El parámetro 'year' es obligatorio y no puede estar vacío."])
 
-        # Validar que year sea un número de 4 dígitos
-        if not year.isdigit() or len(year) != 4:
-            raise HTTPException(status_code=400, detail="El parámetro 'year' debe ser un número de 4 dígitos.")
+        # Validar que year sea un número
+        if not year.isdigit():
+            return JSONResponse(content=["El parámetro 'year' debe ser un número."])
         
+        # Validar que year sea un número de 4 dígitos
+        if len(year) != 4:
+            return JSONResponse(content=["El parámetro 'year' debe ser un número de 4 dígitos."])
+        
+
         #convertimos a int
         year = int(year)
 
@@ -441,6 +467,10 @@ def getSentimentAnalysisForYear(year: str = Query(..., description="Año (4 díg
 
         #filtramos
         df_sentiment = df_sentiment[df_sentiment['year'] == year]
+
+        # Validamos si hay registros para ese año
+        if df_sentiment.shape[0] ==0:
+            return JSONResponse(content=["No hay registros correspondientes al año ingresado"])
 
         #recuento de sentiments
         positivos = df_sentiment['Positivos'].iloc[0]
@@ -483,11 +513,11 @@ def getRecommendationByItem(item_id: str = Query(..., description="Item Id Numer
 
         # Validar que year esté presente
         if not item_id:
-            raise HTTPException(status_code=400, detail="El parámetro 'item_id' es obligatorio y no puede estar vacío.")
+            return JSONResponse(content = ["El parámetro 'item_id' es obligatorio y no puede estar vacío."])
 
         # Validar que year sea un número
         if not item_id.isdigit():
-            raise HTTPException(status_code=400, detail="El parámetro 'item_id' debe ser un Numerico.")
+            return JSONResponse(content = ["El parámetro 'item_id' debe ser un Numerico."])
         
         #Casteamos la variable 
         item_id = int(item_id)

@@ -1,9 +1,10 @@
 # main.py
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from Funciones.api import *
 
 #Creamos una instancia
 app = FastAPI()
+
 
 #END POINTs
 
