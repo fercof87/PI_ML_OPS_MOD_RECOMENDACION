@@ -9,7 +9,7 @@ from Funciones.json_func import *
 #ROOT
 '''--------------------------------------------------------------------------------
 Autor   :   Ing. Fernando G. Cofone
-Fecha   :   13 de Septiembre de 2023
+Fecha   :   20 de Septiembre de 2023
 Objetivo:   Obtiene la información de la API.
 Params  :    
 Returns :   str: Información sobre la API. 
@@ -17,9 +17,29 @@ Returns :   str: Información sobre la API.
 def getIndex():
 
     try:
-        texto = "API Creada por Ing. Fernando G. Cofone" + "\n"
-        texto += "MLOPs - Recomendacion de Juegos."
-        return texto
+        html_content = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Información General de la API</title>
+        </head>
+        <body>
+            <h1>API Creada por Ing. Fernando G. Cofone</h1>
+            <h2>MLOPs - Recomendación de Juegos</h2>
+            <h2>Endpoints:</h2>
+            <ol>
+                <li><code>/userdata(User_id: str)</code>: Proporciona detalles sobre el gasto del usuario, el porcentaje de recomendación basado en reseñas y la cantidad de ítems.</li>
+                <li><code>/countreviews(YYYY-MM-DD1: str, YYYY-MM-DD2: str)</code>: Calcula la cantidad de usuarios que realizaron reseñas entre las fechas proporcionadas y el porcentaje de recomendación basado en reseñas.</li>
+                <li><code>/genre(género: str)</code>: Muestra el puesto en el ranking para un género de videojuegos específico según la columna PlayTimeForever.</li>
+                <li><code>/userforgenre(género: str)</code>: Ofrece el top 5 de usuarios con más horas de juego en el género especificado, junto con su URL y user_id.</li>
+                <li><code>/developer(desarrollador: str)</code>: Presenta información sobre la cantidad de ítems y el porcentaje de contenido gratuito por año, según la empresa desarrolladora.</li>
+                <li><code>/sentiment_analysis(año: int)</code>: Devuelve una lista con la cantidad de registros de reseñas de usuarios categorizados con análisis de sentimiento para un año de lanzamiento dado.</li>
+                <li><code>/recommendation(item_id: int)</code>: Devuelve una lista de recomendación de 5 juegos similares al item_id suministrado. En caso de no encontrar el item_id, recomendará los 5 juegos con más calificaciones positivas detectadas en las reviews.</li>
+            </ol>
+        </body>
+        </html>
+        """
+        return HTMLResponse(content=html_content)
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error en getIndex: {str(e)}")
