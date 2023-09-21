@@ -14,12 +14,12 @@ async def index():
     return getIndex()
 
 #1
-@app.get("/userdata/{user_id:path}")
+@app.get("/userData/{user_id:path}")
 async def userData(user_id: str):
     return getUserData(user_id)
 
 #2
-@app.get("/countreviews/")
+@app.get("/countReviews/")
 async def countReviews(start_date: str, end_date: str):
     return getCountReviews(start_date,end_date)
 
@@ -45,6 +45,12 @@ async def sentimentAnalysis(year: str):
 
 
 #7 - Machine Learning - Recomendacion by Item
-@app.get("/recommendation/{item_id:path}")
-async def recommendation(item_id: str):
+@app.get("/recommendationByItem/{item_id:path}")
+async def recommendationByItem(item_id: str):
     return getRecommendationByItem(item_id)
+
+
+#8 - Machine Learning - Recomendacion by User
+@app.get("/recommendationByUser/{user_id:path}")
+async def recommendationByUser(user_id: str):
+    return getRecommendationByUser(user_id)

@@ -74,10 +74,6 @@ def getUserData(user_id: str = Query(..., description="ID del usuario (alfanumé
         # Validar que user_id esté presente
         if not user_id:
             return JSONResponse(content = ["El parámetro 'user_id' es obligatorio y no puede estar vacío."])
-
-        # Validar que user_id sea alfanumérico con caracteres especiales permitidos
-        if not user_id.isalnum():
-            return JSONResponse(content = ["El parámetro 'user_id' debe ser alfanumérico con caracteres especiales permitidos."])
         
         #Abrimos archivos
         df_spent     = leerJsonGz("Datos/","spent_by_user.json.gz",1)
@@ -259,17 +255,14 @@ def getUserForGenre(genre: str = Query(..., description="Género (letras y espac
         df_user_genre = leerJsonGz("Datos/","user_genre_ranking.json.gz",1)
 
         # Filtrar el DF directamente
-        df_user_genre = df_user_genre[df_user_genre['genres'].str.lower() == genre]
+        df_user_genre = df_user_genre[df_user_genre['genre'].str.lower() == genre]
 
         # Validar si se encontraron registros
         if df_user_genre.empty:
             return JSONResponse(content=["El Género no ha sido Encontrado"])
 
-        # Agrupar y sumar playtime_forever
-        df_user_genre = df_user_genre.groupby(['user_id', 'user_url'])['playtime_forever'].sum().reset_index()
-
-        # Ordenar por Playtime_forever y limitar a los primeros 5 registros
-        df_user_genre = df_user_genre.nlargest(5, 'playtime_forever')
+        # Seleccionar las columnas necesarias
+        df_user_genre = df_user_genre[['user_id', 'user_url', 'playtime_forever']]
 
         # Renombrar columnas
         df_user_genre.columns = ['USER ID', 'USER URL', 'PLAYTIME FOREVER']
@@ -541,3 +534,45 @@ def getRecommendationByItem(item_id: str = Query(..., description="Item Id Numer
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error en getRecomendationByItem: {str(e)}")
+    
+
+#8
+'''-------------------------------------------------------------------------------------------
+Autor   :   Ing. Fernando G. Cofone
+Fecha   :   21 de Septiembre de 2023
+Objetivo:   Obtener recomendaciones basadas en un user.
+Params  :   user_id (str) - El ID del user para el cual se desea obtener recomendaciones.
+Returns :   Una lista de los IDs de los ítems recomendados para ese user.
+-------------------------------------------------------------------------------------------'''
+def getRecommendationByUser(user_id: str = Query(..., description="ID del usuario (alfanumérico con caracteres especiales permitidos)")):
+
+    try:
+
+        # Quitar espacios en blanco del principio y el final
+        user_id = user_id.strip()
+
+        # Validar que user_id esté presente
+        if not user_id:
+            return JSONResponse(content = ["El parámetro 'user_id' es obligatorio y no puede estar vacío."])
+        
+        #Abrimos archivos
+        df_most_played_by_user = leerJsonGz("Datos/","most_played_by_user.json.gz",1)
+
+        # Buscar el usuario en df_most_played_by_user
+        user_row = df_most_played_by_user[df_most_played_by_user['user_id'] == user_id]
+
+        #Valido si el usuario esta en el archivo
+        if user_row.shape[0] > 0:
+            # Invoco a getRecommendationByItem con el item mas jugado por el usuario
+            most_played_item_id = user_row['most_played_item_id'].values[0]
+            most_played_item_id = str(most_played_item_id)
+            return getRecommendationByItem(most_played_item_id)
+        else:
+            # El usuario no existe en el DataFrame retornamos TOP 5 de juegos
+            df_default_recommend_5 = leerJsonGz("Datos/","default_recommend_5.json.gz",1)
+            recommendations = df_default_recommend_5['item_id'].tolist()
+
+        return recommendations
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en getRecommendationByUser: {str(e)}")
