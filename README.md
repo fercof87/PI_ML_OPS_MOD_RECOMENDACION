@@ -20,7 +20,7 @@
 <!-- Enlaces -->
 <h3>Enlaces</h3>
 <hr>
-<table align="center" border="0">
+<table align="center" border="0" style="border-collapse: collapse;">
   <tr>
     <td align="center">
       <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
