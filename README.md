@@ -15,7 +15,9 @@
 <br>
 
 ## Enlaces
-<table align="center">
+
+<hr>
+<table style="border-collapse: collapse; margin: 0 auto;">
   <tr>
     <td align="center">
       <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
@@ -211,7 +213,7 @@ La API resultante ha sido desplegada en la plataforma Render. Esto habilita la i
 <br>
 <hr>
 
-<table align="center">
+<table style="border-collapse: collapse; margin: 0 auto;">
   <tr>
     <td align="center">
       <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
@@ -243,8 +245,14 @@ La API resultante ha sido desplegada en la plataforma Render. Esto habilita la i
 <hr>
 <br>
 
-<div style="text-align: center; color:#FCCf33;"> 
-  <p style="text-align: center;">
-    ¡Gracias por su interés en mi trabajo!
-  </p>
-</div>
+<table align="center">
+  <tr>
+    <td align="center">
+      <div style="color:#FCCf33;"> 
+        <p style="text-align: center;">
+          ¡Gracias por su interés en mi trabajo!
+        </p>
+      </div>
+    </td>
+  </tr>
+</table>
