@@ -30,6 +30,9 @@ def getIndex():
                 <hr> <!-- Línea horizontal -->
                 <h2>Enlaces:</h2>
                     <p align="center">
+                        <a href="https://pi-ml-ops-mod-recomendacion.onrender.com/docs" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+                            API DOCs
+                        </a> 
                         <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
                             Mi Linkedin
                         </a> 
