@@ -20,36 +20,34 @@
 <!-- Enlaces -->
 <h3>Enlaces</h3>
 <hr>
-<div style="margin: 0 auto;">
-  <table style="border-collapse: collapse;">
-    <tr>
-      <td align="center">
-        <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
-          <img src="src/linkedin.png" alt="LinkedIn" width="75" height="75">
-          <br>Mi LinkedIn
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/fercof87/PI_ML_OPS_MOD_RECOMENDACION" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
-          <img src="src/github.png" alt="GitHub" width="75" height="75">
-          <br>GitHub
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://pi-ml-ops-mod-recomendacion.onrender.com" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
-          <img src="src/api.png" alt="Render" width="75" height="75">
-          <br>Mi API
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://www.youtube.com.ar" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
-          <img src="src/youtube.png" alt="Presentacion" width="75" height="75">
-          <br>Presentación
-        </a>
-      </td>
-    </tr>
-  </table>
-</div>
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+        <img src="src/linkedin.png" alt="LinkedIn" width="75" height="75">
+        <br>Mi LinkedIn
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/fercof87/PI_ML_OPS_MOD_RECOMENDACION" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+        <img src="src/github.png" alt="GitHub" width="75" height="75">
+        <br>GitHub
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://pi-ml-ops-mod-recomendacion.onrender.com" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+        <img src="src/api.png" alt="Render" width="75" height="75">
+        <br>Mi API
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://www.youtube.com.ar" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+        <img src="src/youtube.png" alt="Presentacion" width="75" height="75">
+        <br>Presentación
+      </a>
+    </td>
+  </tr>
+</table>
 <hr>
 <br>
 
