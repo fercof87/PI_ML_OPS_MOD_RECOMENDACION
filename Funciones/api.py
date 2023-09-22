@@ -46,7 +46,7 @@ def getIndex():
                     <li><code><strong style="color: #ff5733">/developer/</strong> (desarrollador: str)</code>:<br>&nbsp;&nbsp;&nbsp;Presenta información sobre la cantidad de ítems y el porcentaje de contenido gratuito por año, según la empresa desarrolladora.</li>
                     <li><code><strong style="color: #ff5733">/sentiment_analysis/</strong> (año: int)</code>:<br>&nbsp;&nbsp;&nbsp;Devuelve una lista con la cantidad de registros de reseñas de usuarios categorizados con análisis de sentimiento para un año de lanzamiento dado.</li>
                     <li><code><strong style="color: #ff5733">/recommendationByItem/</strong> (item_id: int)</code>:<br>&nbsp;&nbsp;&nbsp;Devuelve una lista de recomendación de 5 juegos similares al item_id suministrado. En caso de no encontrar el item_id, recomendará los 5 juegos con más calificaciones positivas detectadas en las reviews.</li>
-                    <li><code><strong style="color: #ff5733">/recommendationByUser/</strong> (item_id: int)</code>:<br>&nbsp;&nbsp;&nbsp;Devuelve una lista de recomendación de 5 juegos en funcion al usuario suministrado. En caso de no encontrar el user_id, recomendará los 5 juegos con más calificaciones positivas detectadas en las reviews.</li>
+                    <li><code><strong style="color: #ff5733">/recommendationByUser/</strong> (user_id: int)</code>:<br>&nbsp;&nbsp;&nbsp;Devuelve una lista de recomendación de 5 juegos en funcion al usuario suministrado. En caso de no encontrar el user_id, recomendará los 5 juegos con más calificaciones positivas detectadas en las reviews.</li>
                 </ol>
             </body>
             </html>
