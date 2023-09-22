@@ -20,7 +20,7 @@
 <!-- Enlaces -->
 <h3>Enlaces</h3>
 <hr>
-<div style="display: flex; justify-content: center;">
+<div style="margin: 0 auto;">
   <table style="border-collapse: collapse;">
     <tr>
       <td align="center">
