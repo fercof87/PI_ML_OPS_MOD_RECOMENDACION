@@ -45,7 +45,8 @@ def getIndex():
                     <li><code><strong style="color: #ff5733">/userforgenre/</strong> (género: str)</code>:<br>&nbsp;&nbsp;&nbsp;Ofrece el top 5 de usuarios con más horas de juego en el género especificado, junto con su URL y user_id.</li>
                     <li><code><strong style="color: #ff5733">/developer/</strong> (desarrollador: str)</code>:<br>&nbsp;&nbsp;&nbsp;Presenta información sobre la cantidad de ítems y el porcentaje de contenido gratuito por año, según la empresa desarrolladora.</li>
                     <li><code><strong style="color: #ff5733">/sentiment_analysis/</strong> (año: int)</code>:<br>&nbsp;&nbsp;&nbsp;Devuelve una lista con la cantidad de registros de reseñas de usuarios categorizados con análisis de sentimiento para un año de lanzamiento dado.</li>
-                    <li><code><strong style="color: #ff5733">/recommendation/</strong> (item_id: int)</code>:<br>&nbsp;&nbsp;&nbsp;Devuelve una lista de recomendación de 5 juegos similares al item_id suministrado. En caso de no encontrar el item_id, recomendará los 5 juegos con más calificaciones positivas detectadas en las reviews.</li>
+                    <li><code><strong style="color: #ff5733">/recommendationByItem/</strong> (item_id: int)</code>:<br>&nbsp;&nbsp;&nbsp;Devuelve una lista de recomendación de 5 juegos similares al item_id suministrado. En caso de no encontrar el item_id, recomendará los 5 juegos con más calificaciones positivas detectadas en las reviews.</li>
+                    <li><code><strong style="color: #ff5733">/recommendationByUser/</strong> (item_id: int)</code>:<br>&nbsp;&nbsp;&nbsp;Devuelve una lista de recomendación de 5 juegos en funcion al usuario suministrado. En caso de no encontrar el user_id, recomendará los 5 juegos con más calificaciones positivas detectadas en las reviews.</li>
                 </ol>
             </body>
             </html>
@@ -76,21 +77,14 @@ def getUserData(user_id: str = Query(..., description="ID del usuario (alfanumé
             return JSONResponse(content = ["El parámetro 'user_id' es obligatorio y no puede estar vacío."])
         
         #Abrimos archivos
-        df_spent     = leerJsonGz("Datos/","spent_by_user.json.gz",1)
-        df_recommend = leerJsonGz("Datos/","perc_recommend_by_user.json.gz",1)
-        df_count     = leerJsonGz("Datos/","count_items_by_user.json.gz",1)
+        df_user_data  = leerJsonGz("Datos/","user_data.json.gz",1)
 
         # Validamos que exista el user_id en los 3 DFs
-        if (user_id not in df_spent['user_id'].values) and (user_id not in df_recommend['user_id'].values) and (user_id not in df_count['user_id'].values):
+        if (user_id not in df_user_data['user_id'].values):
             return JSONResponse(content = ["Usuario No Encontrado"]) 
 
-        # Filtramos los df por user_id
-        df_spent     = df_spent[df_spent['user_id'] == user_id]
-        df_recommend = df_recommend[df_recommend['user_id'] == user_id][['user_id', 'perc_recommend']]
-        df_count     = df_count[df_count['user_id'] == user_id]
-
         # Combinamos DFs
-        result = df_spent.merge(df_recommend, on='user_id', how='outer').merge(df_count, on='user_id', how='outer')
+        result = df_user_data[df_user_data['user_id'] == user_id][['user_id', 'spent', 'perc_recommend', 'count_items']]
         
         # Renombramos las columnas
         result.columns = ['USER ID', 'SPENT', '% RECOMMEND', 'ITEMs COUNT']

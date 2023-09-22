@@ -41,7 +41,7 @@
       </a>
     </td>
     <td align="center">
-      <a href="https://www.youtube.com.ar" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+      <a href="https://youtu.be/Gtk9If4_khU" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
         <img src="src/youtube.png" alt="Presentacion" width="75" height="75">
         <br>Presentación
       </a>
@@ -240,7 +240,7 @@ La API resultante ha sido desplegada en la plataforma Render. Esto habilita la i
       </a>
     </td>
     <td align="center">
-      <a href="https://www.youtube.com.ar" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
+      <a href="https://youtu.be/Gtk9If4_khU" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
         <img src="src/youtube.png" alt="Presentacion" width="75" height="75">
         <br>Presentación
       </a>
