@@ -16,7 +16,6 @@
 
 ## Enlaces
 
-<hr>
 <table style="border-collapse: collapse; margin-left: auto; margin-right: auto; width: 80%;">
   <tr>
     <td align="center">
