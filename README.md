@@ -16,7 +16,8 @@
 
 ## Enlaces
 
-<table style="border-collapse: collapse; margin-left: auto; margin-right: auto; width: 80%;">
+<hr>
+<table style="border-collapse: collapse; margin: 0 auto; width: 80%;">
   <tr>
     <td align="center">
       <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
