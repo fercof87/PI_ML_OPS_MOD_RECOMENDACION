@@ -14,10 +14,13 @@
 ### Ing. Fernando G. Cofone
 <br>
 
-## Enlaces
 
+
+
+<!-- Enlaces -->
+<h3>Enlaces</h3>
 <hr>
-<table style="border-collapse: collapse; margin: 0 auto; width: 80%;">
+<table style="border-collapse: collapse; margin: 0 auto;">
   <tr>
     <td align="center">
       <a href="https://www.linkedin.com/in/fcofone" style="margin: 0 5px; display: inline-block; padding: 5px; border-radius: 5px;">
@@ -211,8 +214,11 @@ La API resultante ha sido desplegada en la plataforma Render. Esto habilita la i
 <br>
 <br>
 <br>
-<hr>
 
+
+<!-- Enlaces -->
+<h3>Enlaces</h3>
+<hr>
 <table style="border-collapse: collapse; margin: 0 auto;">
   <tr>
     <td align="center">
